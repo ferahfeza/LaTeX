@@ -1,0 +1,29 @@
+\documentclass[11pt]{article}
+\usepackage{mathtools}
+\usepackage{upgreek}
+\usepackage{tabularx}
+\usepackage{siunitx}
+
+\newlength{\conditionwd}
+\newenvironment{variables}[1][where\quad]
+  {%
+   #1\tabularx{\textwidth-\widthof{#1}}[t]{
+     >{$}l<{$} @{${}:\enspace{}$} l>{(}l<{)}@{}
+   }%
+  }
+  {\endtabularx\\[\belowdisplayskip]}
+\begin{document}
+
+\begin{align} \label{eq:bingham}
+    \mathbf{D}&=\epsilon \mathbf{E}\\
+    \mathbf{B}&=\mu \mathbf{H}\\
+    \mathbf{J}&=\sigma \mathbf{E}\\
+    \end{align}
+
+\begin{variables}
+    \mathbf{D}      & Electrical Flux Density\\
+    \mathbf{E}      & Electric Field Intensity\\
+    \mathbf{B}      & Magnetic Flux Density \\
+    \mathbf{H}      & Magnetic Field Intensity
+\end{variables}
+\end{document}
