@@ -4,8 +4,10 @@
 
 \begin{document}
 \begin{tikzpicture}
-[open box/.style={regular polygon,regular polygon sides=4,
-name=opbo,append after command={(opbo.north west)|-(opbo.south east)--(opbo.north east)}}]
+[open box/.style={regular polygon,
+regular polygon sides=4,
+name=opbo,
+append after command={(opbo.north west)|-(opbo.south east)--(opbo.north east)}}]
 
 \draw node[open box]{RECT!};
 
