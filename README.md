@@ -1,1 +1,2 @@
 # LaTeX
+LaTeX code collection.
