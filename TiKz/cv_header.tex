@@ -1,0 +1,30 @@
+\documentclass{book}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagenumbering{gobble}
+%\hfill
+\noindent\begin{tikzpicture}[baseline=(frog.center)]
+   \begin{scope}
+    \clip circle (2cm);
+    \node [inner sep=-10pt] (frog) {\includegraphics[width=6cm]{example-image}};
+   \end{scope} 
+    \node [right=0pt of frog,
+           text width=10cm,
+           align=left,
+           draw,
+           fill=green!30,
+           inner sep=2mm] {%
+       {\Huge \textbf{My Name Here}} \\[5pt]
+       \begin{tabular}{rl}
+        \textsc{Email:} & MyeMail@gmail.com \\ 
+        \textsc{Telefon:} & \ xxx \ xx \ xxx \\
+        \textsc{Sted:} & xxxx, xxxxx \\
+    \end{tabular}
+    };       
+\end{tikzpicture}
+\begin{document}
+
+
+\chapter{A}
+\end{document}
