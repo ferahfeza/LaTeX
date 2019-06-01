@@ -1,4 +1,5 @@
-\documentclass[tikz,border=3.14mm]{standalone} \usetikzlibrary{positioning,intersections}
+\documentclass[tikz,border=3.14mm]{standalone}
+\usetikzlibrary{positioning,intersections}
 \begin{document}
 \begin{tikzpicture} 
 \path [draw,help lines,name path=grid] (0,0) grid (3,2);
