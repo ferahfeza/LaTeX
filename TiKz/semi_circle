@@ -1,7 +1,8 @@
 \documentclass[tikz,border=3.14mm]{standalone} \usetikzlibrary{positioning,intersections}
 \begin{document}
 \begin{tikzpicture} 
-\path [draw,help lines,name path=grid] (0,0) grid (3,2); \path [draw,name path=line1] (0mm,0mm) to[bend left=45]++ (45:2.1213cm); 
+\path [draw,help lines,name path=grid] (0,0) grid (3,2);
+\path [draw,name path=line1] (0mm,0mm) to[bend left=45]++ (45:2.1213cm); 
 \path [draw,name path=line2] (3cm,0) to[bend right=45]++ (135:2.1213cm); 
 \end{tikzpicture}
 \end{document}
