@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "tikz-ok",
+    "name": "TikZ ile Ok Çizimi",
+    "category": "TikZ",
+    "tags": ["tikz", "arrow", "diagram"],
+    "description": "Basit bir ok çizimi örneği.",
+    "texPath": "assets/tex/tikz-ok.tex",
+    "pdfPath": "assets/pdf/tikz-ok.pdf",
+    "createdAt": "2025-09-08"
+  },
+  {
+    "slug": "latex-matris",
+    "name": "LaTeX Matris Çizimi",
+    "category": "LaTeX",
+    "tags": ["matrix", "math"],
+    "description": "pmatrix ile matris gösterimi.",
+    "texPath": "assets/tex/latex-matris.tex",
+    "pdfPath": "assets/pdf/latex-matris.pdf",
+    "createdAt": "2025-09-07"
+  }
+]
