@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LaTeX/TikZ Örnekleri</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <style>
+    .tag-badge { margin-right: .25rem; }
+    .table thead th { white-space: nowrap; }
+    .search-help { font-size: .875rem; color: #6c757d; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="./">LaTeX/TikZ Örnekleri</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="d-flex flex-wrap align-items-end gap-3 mb-3">
+    <div>
+      <h1 class="h4 mb-1">Örnekler</h1>
+      <div class="search-help">JSON'dan yüklenir. Tabloyu DataTables ile filtreleyin, sıralayın, arayın.</div>
+    </div>
+    <div class="ms-auto d-flex gap-2 flex-wrap">
+      <div>
+        <label for="categoryFilter" class="form-label mb-1">Kategori</label>
+        <select id="categoryFilter" class="form-select form-select-sm">
+          <option value="">Tümü</option>
+        </select>
+      </div>
+      <div>
+        <label for="searchInput" class="form-label mb-1">Ara</label>
+        <input id="searchInput" type="search" class="form-control form-control-sm" placeholder="Ara (başlık, açıklama, tag...)">
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle" id="examplesTable" style="width:100%">
+      <thead class="table-light">
+        <tr>
+          <th>Başlık</th>
+          <th>Kategori</th>
+          <th>Taglar</th>
+          <th>Tarih</th>
+          <th>İşlem</th>
+        </tr>
+      </thead>
+      <tbody>
+      <!-- Satırlar JSON yüklendikten sonra eklenecek -->
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="container my-5 text-center text-muted">
+  <small>Bootstrap 5 + DataTables &middot; İçerik: data/samples.json</small>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+<script src="js/utils.js"></script>
+<script>
+(async function() {
+  const $table = $('#examplesTable');
+  const $tbody = $table.find('tbody');
+  const $cat = $('#categoryFilter');
+  const $search = $('#searchInput');
+
+  // JSON verisini yükle
+  let items = [];
+  try {
+    const res = await fetch('data/samples.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('JSON yüklenemedi');
+    items = await res.json();
+  } catch (e) {
+    console.error(e);
+    $tbody.append(`<tr><td colspan="5" class="text-danger">Veri yüklenemedi: ${escapeHTML(e.message)}</td></tr>`);
+    return;
+  }
+
+  // Satırları oluştur
+  for (const it of items) {
+    const nameHtml = `
+      <strong>${escapeHTML(it.name || '')}</strong>
+      <br><small class="text-muted">${escapeHTML(it.description || '')}</small>
+    `;
+    const catHtml = escapeHTML(it.category || '-');
+
+    let tagsHtml = '';
+    if (it.tags && it.tags.length) {
+      tagsHtml = it.tags.map(tag => `<span class="badge text-bg-secondary tag-badge">${escapeHTML(tag)}</span>`).join(' ');
+    } else {
+      tagsHtml = '<span class="text-muted">-</span>';
+    }
+
+    const dateDisplay = it.createdAt ? formatDate(it.createdAt) : '-';
+    const actionHtml = `<a class="btn btn-sm btn-primary" href="sample.html?slug=${encodeURIComponent(it.slug)}">Görüntüle</a>`;
+
+    const tr = document.createElement('tr');
+
+    const tdName = document.createElement('td'); tdName.innerHTML = nameHtml;
+    const tdCat = document.createElement('td'); tdCat.textContent = it.category || '-';
+    const tdTags = document.createElement('td'); tdTags.innerHTML = tagsHtml;
+    const tdDate = document.createElement('td'); tdDate.textContent = dateDisplay; tdDate.setAttribute('data-order', it.createdAt || '');
+    const tdAction = document.createElement('td'); tdAction.innerHTML = actionHtml;
+
+    tr.append(tdName, tdCat, tdTags, tdDate, tdAction);
+    $tbody.append(tr);
+  }
+
+  // Kategorileri doldur
+  const categories = Array.from(new Set(items.map(i => i.category).filter(Boolean))).sort();
+  for (const c of categories) {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    $cat.append(opt);
+  }
+
+  // DataTables başlat
+  const dt = $table.DataTable({
+    stateSave: true,
+    pageLength: 25,
+    order: [[3, 'desc']], // Tarih sütunu (0-based index: 3)
+    language: { url: 'https://cdn.datatables.net/plug-ins/1.13.8/i18n/tr.json' },
+    dom: 'rtip', // Varsayılan arama kutusunu gizle, kendi aramamızı kullanacağız
+  });
+
+  // Kategori filtresi
+  $cat.on('change', function() {
+    const val = this.value;
+    if (!val) {
+      dt.column(1).search('').draw(); // kategori sütunu temizle
+    } else {
+      // Tam eşleşme için ^...$ regex
+      dt.column(1).search('^' + escapeRegex(val) + '$', true, false).draw();
+    }
+  });
+
+  // Global arama
+  $search.on('input', function() {
+    dt.search(this.value).draw();
+  });
+})();
+
+// Regex kaçış
+function escapeRegex(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

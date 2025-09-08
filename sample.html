@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Örnek Detay</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- highlight.js (tema: GitHub) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/styles/github.min.css">
+  <style>
+    pre.code-view {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 1rem;
+      overflow: auto;
+      height: 80vh;
+    }
+    .pdf-frame {
+      width: 100%;
+      height: 80vh;
+      border: 1px solid #dee2e6;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="./">LaTeX/TikZ Örnekleri</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div id="meta" class="mb-3">
+    <!-- Başlık, kategori, taglar -->
+  </div>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="d-flex align-items-center justify-content-between">
+        <h2 class="h6 mb-2">LaTeX Kodu</h2>
+        <button id="copyBtn" class="btn btn-sm btn-outline-secondary" disabled>Kopyala</button>
+      </div>
+      <pre class="code-view"><code id="codeBlock" class="language-latex">Yükleniyor...</code></pre>
+    </div>
+    <div class="col-md-6">
+      <h2 class="h6 mb-2">PDF Çıktı</h2>
+      <iframe id="pdfFrame" class="pdf-frame" title="PDF Çıktı"></iframe>
+      <div class="mt-2 d-flex gap-2">
+        <a id="openPdf" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener">PDF'i yeni sekmede aç</a>
+        <a id="downloadTex" class="btn btn-sm btn-outline-secondary" download>LaTeX (.tex) indir</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="container my-5 text-center text-muted">
+  <small>Statik detay sayfası &middot; İçerik: data/samples.json</small>
+</footer>
+
+<script src="js/utils.js"></script>
+<!-- highlight.js çekirdek + LaTeX dili -->
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/languages/latex.min.js"></script>
+<script>
+(async function() {
+  const slug = getQueryParam('slug');
+  const metaDiv = document.getElementById('meta');
+  const codeBlock = document.getElementById('codeBlock');
+  const pdfFrame = document.getElementById('pdfFrame');
+  const openPdf = document.getElementById('openPdf');
+  const downloadTex = document.getElementById('downloadTex');
+  const copyBtn = document.getElementById('copyBtn');
+
+  let rawCode = '';
+
+  if (!slug) {
+    metaDiv.innerHTML = '<div class="alert alert-danger">Geçersiz bağlantı: slug eksik.</div>';
+    codeBlock.textContent = '';
+    return;
+  }
+
+  // JSON'dan örneği bul
+  let item = null;
+  try {
+    const res = await fetch('data/samples.json', { cache: 'no-store' });
+    const data = await res.json();
+    item = data.find(x => x.slug === slug);
+  } catch (e) {
+    console.error(e);
+  }
+  if (!item) {
+    metaDiv.innerHTML = '<div class="alert alert-danger">Örnek bulunamadı.</div>';
+    codeBlock.textContent = '';
+    return;
+  }
+
+  // Üst meta
+  const tagsHtml = (item.tags || []).map(t => `<span class="badge text-bg-secondary me-1">${escapeHTML(t)}</span>`).join(' ');
+  metaDiv.innerHTML = `
+    <div class="d-flex flex-wrap align-items-center justify-content-between">
+      <div>
+        <h1 class="h4 mb-1">${escapeHTML(item.name || '')}</h1>
+        <div class="text-muted">
+          ${item.category ? `<span class="badge text-bg-info me-2">${escapeHTML(item.category)}</span>` : ''}
+          ${tagsHtml || '<span class="text-muted">Tag yok</span>'}
+        </div>
+        ${item.description ? `<p class="mt-2 mb-0">${escapeHTML(item.description)}</p>` : ''}
+      </div>
+      <div class="text-muted">${item.createdAt ? formatDate(item.createdAt) : ''}</div>
+    </div>
+  `;
+
+  // Kod yükle (XSS güvenli: textContent)
+  try {
+    const res = await fetch(item.texPath, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Kod dosyası bulunamadı');
+    rawCode = await res.text();
+    codeBlock.textContent = rawCode;
+    // highlight.js ile vurgula
+    if (window.hljs) {
+      hljs.highlightElement(codeBlock);
+    }
+    // Kopyala butonunu etkinleştir
+    copyBtn.disabled = false;
+  } catch (e) {
+    codeBlock.textContent = 'LaTeX dosyası yüklenemedi: ' + e.message;
+  }
+
+  // PDF iframe ve linkler
+  pdfFrame.src = item.pdfPath;
+  openPdf.href = item.pdfPath;
+  downloadTex.href = item.texPath;
+
+  // Kopyala davranışı
+  copyBtn.addEventListener('click', async () => {
+    if (!rawCode) return;
+    const originalText = copyBtn.textContent;
+    try {
+      await copyTextToClipboard(rawCode);
+      copyBtn.textContent = 'Kopyalandı!';
+      copyBtn.classList.remove('btn-outline-secondary');
+      copyBtn.classList.add('btn-success');
+    } catch (e) {
+      copyBtn.textContent = 'Kopyalanamadı';
+      copyBtn.classList.remove('btn-outline-secondary');
+      copyBtn.classList.add('btn-danger');
+      console.error(e);
+    } finally {
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+        copyBtn.classList.remove('btn-success', 'btn-danger');
+        copyBtn.classList.add('btn-outline-secondary');
+      }, 1500);
+    }
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
