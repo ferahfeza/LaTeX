@@ -1,0 +1,17 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\definecolor{bayrak}{RGB}{227, 10, 23}
+\begin{document}
+\begin{tikzpicture}[scale=5]
+\pgfmathsetmacro{\G}{1}
+\pgfmathsetmacro{\L}{1.5}
+  \filldraw[bayrak](0,0) rectangle (\L, \G);
+  \filldraw[white] (0.5,0.5) circle (\G/4);
+  \filldraw[bayrak] (0.5625,0.5) circle (0.2*\G);
+  \node[star,scale=5,fill=white, minimum size=0.25cm, rotate=90, star point ratio=2.617,inner sep=0pt] at (0.8225,0.5*\G) {};
+  
+  \end{tikzpicture}
+  
+  \end{document}
