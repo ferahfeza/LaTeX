@@ -1,12 +1,12 @@
 [
   {
-    "slug": "tikz-ok",
-    "name": "TikZ ile Ok Çizimi",
+    "slug": "Türk-bayrak",
+    "name": "TikZ ile Türk Bayrağının çizimi.",
     "category": "TikZ",
-    "tags": ["tikz", "arrow", "diagram"],
-    "description": "Basit bir ok çizimi örneği.",
-    "texPath": "assets/tex/tikz-ok.tex",
-    "pdfPath": "assets/pdf/tikz-ok.pdf",
+    "tags": ["tikz"],
+    "description": "TikZ ile Türk Bayrağının çizimi.",
+    "texPath": "assets/tex/bayrak.tex",
+    "pdfPath": "assets/pdf/bayrak.pdf",
     "createdAt": "2025-09-08"
   },
   {
