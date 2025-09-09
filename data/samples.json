@@ -1,13 +1,13 @@
 [
   {
-    "slug": "tikz-ok",
-    "name": "TikZ ile Ok Çizimi",
+    "slug": "Bayrak-ciz",
+    "name": "TikZ ile Türk Bayrağı Çizimi",
     "category": "TikZ",
-    "tags": ["tikz", "arrow", "diagram"],
-    "description": "Basit bir ok çizimi örneği.",
-    "texPath": "assets/tex/tikz-ok.tex",
-    "pdfPath": "assets/pdf/tikz-ok.pdf",
-    "createdAt": "2025-09-08"
+    "tags": ["tikz"],
+    "description": "Tikz ile Türk Bayrağının çizimi.",
+    "texPath": "assets/tex/bayrak.tex",
+    "pdfPath": "assets/pdf/bayrak.pdf",
+    "createdAt": "09-09-2025"
   },
   {
     "slug": "latex-matris",
