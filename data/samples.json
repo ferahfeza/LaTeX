@@ -3,7 +3,7 @@
     "slug": "Bayrak-ciz",
     "name": "TikZ ile Türk Bayrağı Çizimi",
     "category": "TikZ",
-    "tags": ["tikz"],
+    "tags": ["Türk Bayrağı"],
     "description": "Tikz ile Türk Bayrağının çizimi.",
     "texPath": "assets/tex/bayrak.tex",
     "pdfPath": "assets/pdf/bayrak.pdf",
