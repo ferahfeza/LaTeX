@@ -2,9 +2,9 @@
   {
     "slug": "Bayrak-ciz",
     "name": "TikZ ile Türk Bayrağı Çizimi",
-    "category": "TikZ",
+    "category": "TiKz",
     "tags": ["Türk Bayrağı"],
-    "description": "Tikz ile Türk Bayrağının çizimi.",
+    "description": "TiKz ile Türk Bayrağının çizimi.",
     "texPath": "assets/tex/bayrak.tex",
     "pdfPath": "assets/pdf/bayrak.pdf",
     "createdAt": "09-09-2025"
@@ -18,5 +18,15 @@
     "texPath": "assets/tex/latex-matris.tex",
     "pdfPath": "assets/pdf/latex-matris.pdf",
     "createdAt": "2025-09-07"
+  },
+  {
+    "slug": "tikz-3d",
+    "name": "TiKz ile perspektif",
+    "category": "TiKz",
+    "tags": ["3D", "perspektif"],
+    "description": "TiKz ile perspektif çizim.",
+    "texPath": "assets/tex/3d-perspektif.tex",
+    "pdfPath": "assets/pdf/3d-perspektif.pdf",
+    "createdAt": "2025-09-22"
   }
 ]
