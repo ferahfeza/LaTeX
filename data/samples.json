@@ -10,16 +10,6 @@
     "createdAt": "09-09-2025"
   },
   {
-    "slug": "latex-matris",
-    "name": "LaTeX Matris Çizimi",
-    "category": "LaTeX",
-    "tags": ["matrix", "math"],
-    "description": "pmatrix ile matris gösterimi.",
-    "texPath": "assets/tex/latex-matris.tex",
-    "pdfPath": "assets/pdf/latex-matris.pdf",
-    "createdAt": "2025-09-07"
-  },
-  {
     "slug": "tikz-3d",
     "name": "TiKz ile perspektif",
     "category": "TiKz",
