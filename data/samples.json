@@ -40,13 +40,13 @@
     "createdAt": "2025-10-05"
   },
    {
-    "slug": "turkce-kitap",
-    "name": "Türkçe Kitap Örneği",
+    "slug": "matematik",
+    "name": "Eşitliklerin Yazımı",
     "category": "LaTeX",
-    "tags": ["Türkçe", "Kitap sınıfı"],
-    "description": "Türkçe Kitap Örneği",
-    "texPath": "assets/tex/turkce_kitap_ornek.tex",
-    "pdfPath": "assets/pdf/turkce_kitap_ornek.pdf",
+    "tags": ["matematik", "formüller"],
+    "description": "\\LaTeX{} ile Eşitliklerin Yazımı",
+    "texPath": "assets/tex/matematik_esitlikleri_ornek.tex",
+    "pdfPath": "assets/pdf/matematik_esitlikleri_ornek.pdf",
     "createdAt": "2025-10-05"
   }
 ]
