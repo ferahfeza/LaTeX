@@ -18,5 +18,15 @@
     "texPath": "assets/tex/3d-perspektif.tex",
     "pdfPath": "assets/pdf/3d-perspektif.png",
     "createdAt": "2025-09-22"
+  },
+  {
+    "slug": "turkce-makale",
+    "name": "Türkçe Makale Örneği",
+    "category": "LaTeX",
+    "tags": ["Türkçe", "makale sınıfı"],
+    "description": "Türkçe Makale Örneği",
+    "texPath": "assets/tex/turkce_makale_ornek.tex",
+    "pdfPath": "assets/pdf/turkce_makale_ornek.pdf",
+    "createdAt": "2025-10-05"
   }
 ]
