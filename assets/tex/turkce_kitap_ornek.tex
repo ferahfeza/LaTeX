@@ -1,0 +1,72 @@
+\documentclass[a4paper,12pt,openany]{book}
+\usepackage[utf8]{inputenc}   % Türkçe karakterler için
+\usepackage[T1]{fontenc}      % Türkçe karakterler için
+\usepackage[turkish, shorthands=:!]{babel}   % Türkçe dil desteği.   % Türkçe dil desteği
+\usepackage[top=3cm,
+		    bottom=2cm,
+		    left=2.5cm,
+		    right=2cm]{geometry}%Kenar boşlukları ayarı
+\usepackage{newtxtext}	%Font
+\usepackage{xcolor} % Renk tanımlama için
+\usepackage[
+    colorlinks=true,
+    linkcolor=teal,          % İç bağlantı rengi
+    citecolor=blue,         % Atıf bağlantı rengi
+    urlcolor=magenta        % URL bağlantı rengi
+]{hyperref}
+\usepackage{graphicx}
+
+\title{Örnek Türkçe Kitap}
+\author{Yazar Adı}
+\date{5.10.2025}
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+
+\chapter{Giriş}
+Bu bölümde kitabınızın konusuna giriş yapabilirsiniz.
+
+\section{Referans Gösterme}
+\LaTeX{}'in geliştiricisi olan Leslie Lamport  kitabında sistemi tanıtmıştır \cite{latexkitap}.
+
+\section{Resim Ekleme}
+Dokümana resim ekleyebilmek için \verb|\usepackage{graphicx}| paketi gereklidir. Resmi başlıksız kullanacaksanız,
+\begin{verbatim}
+\includegraphics[scale=1]{'resim_dosyası_adı'}
+\end{verbatim} 
+komutu yeterlidir. Resim başlığı ve numaralandırma gibi özellikler için \verb|\begin{figure}\end{figure}| tagı içine yerleştirmelisiniz.
+\begin{verbatim}
+\begin{figure}[htbp!]
+\includegraphics[scale=1]{'resim_dosyası_adı'}
+\caption{Resim alt yazısı.}\label{•}
+\end{figure}
+\end{verbatim}
+\begin{figure}[htbp!]
+\centering % Sayfaya ortalama.
+\includegraphics[scale=0.5]{example-image-a}
+\caption{Örnek Resim.}\label{resim:1}
+\end{figure}
+
+Resme atıf yapmak için, resim tanımlamasında \verb|\label{•}| tanımını yaptık. Metin içinde \verb|\ref{resim:1}| komutu ile link ataması yapılır.
+Şekil \ref{resim:1}'de örnek bir resim görülmektedir.
+
+\chapter{Teori}
+Burada teorik bilgileri sunabilirsiniz.
+
+
+\begin{thebibliography}{9}
+
+\bibitem{latexkitap}
+Leslie Lamport,
+\textit{LaTeX: A Document Preparation System},
+Addison-Wesley, 2. Baskı, 1994.
+
+\end{thebibliography}
+
+\end{document}
