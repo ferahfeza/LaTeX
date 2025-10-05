@@ -1,0 +1,230 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[turkish]{babel}
+\usepackage{amsmath}    % Gelişmiş matematik komutları
+\usepackage{amssymb}    % Ek semboller
+\usepackage{verbatim}   % verbatim ortamı için
+\usepackage{xcolor}     % Renkli semboller için
+
+\title{\LaTeX{} ile Matematik Eşitlikleri Yazımı}
+\author{Ali İhsan Çanakoğlu}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Giriş}
+Bu dokümanda, matematiksel eşitliklerin \LaTeX{} ile nasıl yazıldığını örneklerle göstereceğiz.
+Önce kodu \texttt{verbatim} ortamında vereceğiz, ardından \LaTeX{} Çıktısıni göstereceğiz.
+Ayrıca, matrislerin yazımı ve sembollerin renklendirilmesi gibi ileri konular da ele alınacaktır.
+
+\section{Satır İçi (Inline) Matematik}
+\subsection{Kod}
+\begin{verbatim}
+Fonksiyonumuz $f(x)=ax^2+bx+c$ olsun.
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+Fonksiyonumuz $f(x)=ax^2+bx+c$ olsun.
+
+\section{Numaralı Eşitlik Ortamı}
+\subsection{Kod}
+\begin{verbatim}
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+
+\section{Birden Fazla Satırlı Eşitlik (align)}
+\subsection{Kod}
+\begin{verbatim}
+\begin{align}
+x^2 + y^2 &= r^2 \\
+x &= r \cos\theta \\
+y &= r \sin\theta
+\end{align}
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+\begin{align}
+x^2 + y^2 &= r^2 \\
+x &= r \cos\theta \\
+y &= r \sin\theta
+\end{align}
+
+\section{Matris Yazımı}
+\subsection{Kod}
+\begin{verbatim}
+\[
+A = \begin{bmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{bmatrix}
+\]
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+\[
+A = \begin{bmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22}
+\end{bmatrix}
+\]
+
+\section{Sembollerin Renklendirilmesi}
+\subsection{Kod}
+\begin{verbatim}
+\[
+E = m\textcolor{red}{c}^2
+\]
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+\[
+E = m\textcolor{red}{c}^2
+\]
+
+\subsection{Birden Fazla Renkli Sembol}
+\begin{verbatim}
+\[
+\textcolor{blue}{x}^2 + \textcolor{green}{y}^2 = \textcolor{orange}{r}^2
+\]
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+\[
+\textcolor{blue}{x}^2 + \textcolor{green}{y}^2 = \textcolor{orange}{r}^2
+\]
+
+\section{Matematiksel Sembol Örnekleri}
+\subsection{Kod}
+\begin{verbatim}
+$\alpha, \beta, \gamma, \int_0^1 x\,dx, \sum_{n=1}^{\infty} \frac{1}{n^2}$
+\end{verbatim}
+
+\section{İntegral, Toplam ve Çarpım Örnekleri}
+
+Aşağıda çeşitli integral, toplam ve çarpım örneklerinin önce kodları (\texttt{verbatim} ortamında), ardından renderlanmış halleri sunulmuştur.
+
+\subsection{Temel İntegral}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\int_a^b f(x)\,dx
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\int_a^b f(x)\,dx
+\]
+
+\subsection{Belirli İntegral}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\int_0^1 x^2\,dx
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\int_0^1 x^2\,dx
+\]
+
+\subsection{Çift İntegral}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\iint\limits_{D} xy\,dx\,dy
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\iint\limits_{D} xy\,dx\,dy
+\]
+
+\subsection{Toplam (Sum) Örneği}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\sum_{n=1}^{10} n^2
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\sum_{n=1}^{10} n^2
+\]
+
+\subsection{Sonsuz Toplam}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\sum_{k=0}^{\infty} \frac{1}{2^k}
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\sum_{k=0}^{\infty} \frac{1}{2^k}
+\]
+
+\subsection{Çarpım (Product) Örneği}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\prod_{i=1}^n i
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\prod_{i=1}^n i
+\]
+
+\subsection{Renkli Sembol ile Toplam}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\sum_{n=1}^{\textcolor{red}{N}} \textcolor{blue}{a}_n
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\sum_{n=1}^{\textcolor{red}{N}} \textcolor{blue}{a}_n
+\]
+
+\subsection{Renkli Sembol ile İntegral}
+\subsubsection{Kod}
+\begin{verbatim}
+\[
+\int_0^{\textcolor{green}{T}} \textcolor{magenta}{f}(t)\,dt
+\]
+\end{verbatim}
+
+\subsubsection{\LaTeX{} Çıktısı}
+\[
+\int_0^{\textcolor{green}{T}} \textcolor{magenta}{f}(t)\,dt
+\]
+
+\section{Matematiksel Sembol Örnekleri}
+\subsection{Kod}
+\begin{verbatim}
+$\alpha, \beta, \gamma, \int_0^1 x\,dx, \sum_{n=1}^{\infty} \frac{1}{n^2}$
+\end{verbatim}
+
+\subsection{\LaTeX{} Çıktısı}
+$\alpha, \beta, \gamma, \int_0^1 x\,dx, \sum_{n=1}^{\infty} \frac{1}{n^2}$
+
+
+\end{document}
