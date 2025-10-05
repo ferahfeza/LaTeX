@@ -38,5 +38,15 @@
     "texPath": "assets/tex/turkce_kitap_ornek.tex",
     "pdfPath": "assets/pdf/turkce_kitap_ornek.pdf",
     "createdAt": "2025-10-05"
+  },
+   {
+    "slug": "turkce-kitap",
+    "name": "Türkçe Kitap Örneği",
+    "category": "LaTeX",
+    "tags": ["Türkçe", "Kitap sınıfı"],
+    "description": "Türkçe Kitap Örneği",
+    "texPath": "assets/tex/turkce_kitap_ornek.tex",
+    "pdfPath": "assets/pdf/turkce_kitap_ornek.pdf",
+    "createdAt": "2025-10-05"
   }
 ]
