@@ -1,0 +1,31 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}   % Türkçe karakterler için
+\usepackage[T1]{fontenc}      % Türkçe karakterler için
+\usepackage[turkish, shorthands=:!]{babel}   % Türkçe dil desteği.
+\usepackage[top=3cm,
+		    bottom=2cm,
+		    left=2.5cm,
+		    right=2cm]{geometry}%Kenar boşlukları ayarı
+\usepackage{newtxtext}	%Font 
+
+\title{\LaTeX{} ile Örnek Türkçe Makale Şablonu}
+\author{Yazar Adı}
+\date{5.10.2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Bu belge, Türkçe dilinde yazılmış minimal bir \LaTeX{} makale şablonudur.
+\end{abstract}
+
+\section{Giriş}
+\sloppy % Overfull \hbox (2.75262pt too wide) uyarısını almamak için gerekli komut. Kullanılmayabilir.
+Türkçe belge oluştururken, \verb|\usepackage[turkish, shorthands=:!]{babel}| kullanımına dikkat edilmesi gerekir. \verb|"shorthands=:!"| opsiyonu, Türkçe belgelerde özellikle resim eklemelerde \verb|"="| gibi karakterleri kullanırken hata mesajlarını engeller.
+
+
+\section{Sonuç}
+Sonuçlarınızı burada özetleyebilirsiniz.
+
+\end{document}
