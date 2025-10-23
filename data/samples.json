@@ -3,7 +3,9 @@
     "slug": "Bayrak-ciz",
     "name": "TikZ ile Türk Bayrağı Çizimi",
     "category": "TiKz",
-    "tags": ["Türk Bayrağı"],
+    "tags": [
+      "Türk Bayrağı"
+    ],
     "description": "TiKz ile Türk Bayrağının çizimi.",
     "texPath": "assets/tex/bayrak.tex",
     "pdfPath": "assets/pdf/bayrak.pdf",
@@ -13,7 +15,10 @@
     "slug": "tikz-3d",
     "name": "TiKz ile perspektif",
     "category": "TiKz",
-    "tags": ["3D", "perspektif"],
+    "tags": [
+      "3D",
+      "perspektif"
+    ],
     "description": "TiKz ile perspektif çizim.",
     "texPath": "assets/tex/3d-perspektif.tex",
     "pdfPath": "assets/pdf/3d-perspektif.png",
@@ -23,30 +28,49 @@
     "slug": "turkce-makale",
     "name": "Türkçe Makale Örneği",
     "category": "LaTeX",
-    "tags": ["Türkçe", "makale sınıfı"],
+    "tags": [
+      "Türkçe",
+      "makale sınıfı"
+    ],
     "description": "Türkçe Makale Örneği",
     "texPath": "assets/tex/turkce_makale_ornek.tex",
     "pdfPath": "assets/pdf/turkce_makale_ornek.pdf",
     "createdAt": "2025-10-05"
   },
-   {
+  {
     "slug": "turkce-kitap",
     "name": "Türkçe Kitap Örneği",
     "category": "LaTeX",
-    "tags": ["Türkçe", "Kitap sınıfı"],
+    "tags": [
+      "Türkçe",
+      "Kitap sınıfı"
+    ],
     "description": "Türkçe Kitap Örneği",
     "texPath": "assets/tex/turkce_kitap_ornek.tex",
     "pdfPath": "assets/pdf/turkce_kitap_ornek.pdf",
     "createdAt": "2025-10-05"
   },
-   {
+  {
     "slug": "matematik",
     "name": "Eşitliklerin Yazımı",
     "category": "LaTeX",
-    "tags": ["matematik", "formüller"],
+    "tags": [
+      "matematik",
+      "formüller"
+    ],
     "description": "\\LaTeX{} ile Eşitliklerin Yazımı",
     "texPath": "assets/tex/matematik_esitlikleri_ornek.tex",
     "pdfPath": "assets/pdf/matematik_esitlikleri_ornek.pdf",
     "createdAt": "2025-10-05"
+  },
+  {
+    "slug": "coulomb",
+    "name": "Coulomb Kanunu",
+    "category": "LaTeX",
+    "tags": [],
+    "description": "Coulomb Kanunu Nedir?",
+    "texPath": "assets/tex/Coulomb.tex",
+    "pdfPath": "assets/pdf/Coulomb.pdf",
+    "createdAt": "2025-10-23"
   }
 ]
