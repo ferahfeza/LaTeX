@@ -72,15 +72,5 @@
     "texPath": "assets/tex/Coulomb.tex",
     "pdfPath": "assets/pdf/Coulomb.pdf",
     "createdAt": "2025-10-23"
-  },
-  {
-    "slug": "coulomb",
-    "name": "Coulomb Kanunu",
-    "category": "LaTeX",
-    "tags": [],
-    "description": "Coulomb Kanunu Nedir?",
-    "texPath": "assets/tex/Coulomb.tex",
-    "pdfPath": "assets/pdf/Coulomb.pdf",
-    "createdAt": "2025-10-23"
   }
-]
+ ]
