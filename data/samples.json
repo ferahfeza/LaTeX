@@ -77,10 +77,25 @@
     "slug": "kure",
     "name": "Küreden Silindir Çıkarma",
     "category": "TiKz",
-    "tags": ["3D"],
+    "tags": [
+      "3D"
+    ],
     "description": "Küreden Silindir Çıkarma Çizimi.",
     "texPath": "assets/tex/kure-silindir.tex",
     "pdfPath": "assets/pdf/kure-silindir.pdf",
     "createdAt": "2025-10-25"
+  },
+  {
+    "slug": "yeni-komut",
+    "name": "Yeni Komut Tanımlama",
+    "category": "LaTeX",
+    "tags": [
+      "",
+      ""
+    ],
+    "description": "LaTeX'de yeni komut tanımlama örnekleri.",
+    "texPath": "assets/tex/yeni-komut.tex",
+    "pdfPath": "assets/pdf/yeni-komut.pdf",
+    "createdAt": "2025-10-25"
   }
- ]
+]
