@@ -77,7 +77,7 @@
     "slug": "kure",
     "name": "Küreden Silindir Çıkarma",
     "category": "TiKz",
-    "tags": [3D],
+    "tags": ["3D"],
     "description": "Küreden Silindir Çıkarma Çizimi.",
     "texPath": "assets/tex/kure-silindir.tex",
     "pdfPath": "assets/pdf/kure-silindir.pdf",
