@@ -72,5 +72,15 @@
     "texPath": "assets/tex/Coulomb.tex",
     "pdfPath": "assets/pdf/Coulomb.pdf",
     "createdAt": "2025-10-23"
+  },
+  {
+    "slug": "kure",
+    "name": "Küreden Silindir Çıkarma",
+    "category": "TiKz",
+    "tags": [3D],
+    "description": "Küreden Silindir Çıkarma Çizimi.",
+    "texPath": "assets/tex/kure-silindir.tex",
+    "pdfPath": "assets/pdf/kure-silindir.pdf",
+    "createdAt": "2025-10-25"
   }
  ]
