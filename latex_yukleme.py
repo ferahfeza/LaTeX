@@ -83,11 +83,19 @@ class LatexForm:
 
         tex_dest = os.path.join(TEX_DIR, os.path.basename(self.tex_path))
         pdf_dest = os.path.join(PDF_DIR, os.path.basename(self.pdf_path))
+
+        # Dosya kopyalama işlemleri
         try:
             shutil.copy2(self.tex_path, tex_dest)
-            shutil.copy2(self.pdf_path, pdf_dest)
+            messagebox.showinfo('Bilgi', f'TeX dosyası başarıyla kopyalandı: {tex_dest}')
         except Exception as e:
-            messagebox.showerror('Hata', f'Dosya kopyalama hatası: {e}')
+            messagebox.showerror('Hata', f'TeX dosyası kopyalanamadı: {e}')
+            return
+        try:
+            shutil.copy2(self.pdf_path, pdf_dest)
+            messagebox.showinfo('Bilgi', f'PDF dosyası başarıyla kopyalandı: {pdf_dest}')
+        except Exception as e:
+            messagebox.showerror('Hata', f'PDF dosyası kopyalanamadı: {e}')
             return
 
         slug = os.path.splitext(os.path.basename(self.tex_path))[0].replace(' ', '-').lower()
@@ -112,15 +120,29 @@ class LatexForm:
         messagebox.showinfo('Başarılı', 'samples.json güncellendi.')
 
         # Otomatik git pull, sonra ekle/commit/push
+
+        # Git işlemleri adım adım ve hata kontrolü ile
         try:
-            subprocess.run(['git', 'pull'], cwd=REPO_PATH)
-            subprocess.run(['git', 'add', tex_dest, pdf_dest, SAMPLES_PATH], cwd=REPO_PATH)
+            pull_result = subprocess.run(['git', 'pull'], cwd=REPO_PATH, capture_output=True, text=True)
+            if pull_result.returncode != 0:
+                messagebox.showerror('Git Hatası', f'git pull başarısız:\n{pull_result.stderr}')
+                return
+            add_result = subprocess.run(['git', 'add', tex_dest, pdf_dest, SAMPLES_PATH], cwd=REPO_PATH, capture_output=True, text=True)
+            if add_result.returncode != 0:
+                messagebox.showerror('Git Hatası', f'git add başarısız:\n{add_result.stderr}')
+                return
             commit_message = f"Add {os.path.basename(self.tex_path)} and {os.path.basename(self.pdf_path)}"
-            subprocess.run(['git', 'commit', '-m', commit_message], cwd=REPO_PATH)
-            subprocess.run(['git', 'push'], cwd=REPO_PATH)
+            commit_result = subprocess.run(['git', 'commit', '-m', commit_message], cwd=REPO_PATH, capture_output=True, text=True)
+            if commit_result.returncode != 0 and 'nothing to commit' not in commit_result.stdout:
+                messagebox.showerror('Git Hatası', f'git commit başarısız:\n{commit_result.stderr}')
+                return
+            push_result = subprocess.run(['git', 'push'], cwd=REPO_PATH, capture_output=True, text=True)
+            if push_result.returncode != 0:
+                messagebox.showerror('Git Hatası', f'git push başarısız:\n{push_result.stderr}')
+                return
             messagebox.showinfo('Başarılı', 'Dosyalar ve kayıt eklendi, commit ve push işlemi tamamlandı.')
         except Exception as e:
-            messagebox.showerror('Git Hatası', f'Git işlemi başarısız: {e}')
+            messagebox.showerror('Git Hatası', f'Git işlemi sırasında hata oluştu: {e}')
 
         self.master.destroy()
 
