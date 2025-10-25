@@ -84,5 +84,18 @@
     "texPath": "assets/tex/kure-silindir.tex",
     "pdfPath": "assets/pdf/kure-silindir.pdf",
     "createdAt": "2025-10-25"
+  },
+  {
+    "slug": "yeni-komut",
+    "name": "Yeni Komut Tanımlama",
+    "category": "LaTeX",
+    "tags": [
+      "",
+      ""
+    ],
+    "description": "Yeni komutl(lar) nasıl tanımlanır?",
+    "texPath": "assets/tex/yeni-komut.tex",
+    "pdfPath": "assets/pdf/yeni-komut.pdf",
+    "createdAt": "2025-10-25"
   }
 ]

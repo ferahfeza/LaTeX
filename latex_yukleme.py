@@ -111,8 +111,9 @@ class LatexForm:
             json.dump(samples, f, ensure_ascii=False, indent=2)
         messagebox.showinfo('Başarılı', 'samples.json güncellendi.')
 
-        # Git işlemleri
+        # Otomatik git pull, sonra ekle/commit/push
         try:
+            subprocess.run(['git', 'pull'], cwd=REPO_PATH)
             subprocess.run(['git', 'add', tex_dest, pdf_dest, SAMPLES_PATH], cwd=REPO_PATH)
             commit_message = f"Add {os.path.basename(self.tex_path)} and {os.path.basename(self.pdf_path)}"
             subprocess.run(['git', 'commit', '-m', commit_message], cwd=REPO_PATH)
