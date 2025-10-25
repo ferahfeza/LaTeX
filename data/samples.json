@@ -82,5 +82,15 @@
     "texPath": "assets/tex/kure-silindir.tex",
     "pdfPath": "assets/pdf/kure-silindir.pdf",
     "createdAt": "2025-10-25"
+  },
+  {
+    "slug": "flow-chart",
+    "name": "Akış Şeması Örneği",
+    "category": "TiKz",
+    "tags": ["flow chart"],
+    "description": "TiKz ile Akış Şeması Çizimi.",
+    "texPath": "assets/tex/akis-sema.tex",
+    "pdfPath": "assets/pdf/akis-sema.pdf",
+    "createdAt": "2025-10-25"
   }
  ]
