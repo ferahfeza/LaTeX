@@ -6,6 +6,8 @@
     <title>LaTeX Örnekleri - AstroBlog Teması</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+        <!-- PDF.js (CDN) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,329 +55,278 @@
     <!-- Ana İçerik -->
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
 
-        <!-- Filtreleme ve Arama Bölümü -->
-        <section class="mb-12 p-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Kategori Filtresi -->
-                <div>
-                    <label for="category-filter" class="block text-sm font-medium text-gray-300 mb-2">Kategori</label>
-                    <select id="category-filter" class="w-full bg-slate-700 border border-slate-600 text-white rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500">
-                        <option value="Tümü">Tümü</option>
-                        <option value="TikZ">TikZ</option>
-                        <option value="LaTeX">LaTeX</option>
-                    </select>
-                </div>
-                <!-- Arama Barı -->
-                <div class="md:col-span-2">
-                    <label for="search-input" class="block text-sm font-medium text-gray-300 mb-2">Ara (Başlık, Açıklama, Tag)</label>
-                    <input type="text" id="search-input" class="w-full bg-slate-700 border border-slate-600 text-white rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500" placeholder="Örn: 'Perspektif' veya 'Tablo'">
-                </div>
+        <!-- Detay Görünümü -->
+        <section id="sample-detail" class="mb-12 p-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700">
+            <div id="detail-content" class="text-gray-200">
+                <p class="text-center text-gray-400">Yükleniyor...</p>
             </div>
-        </section>
+            <script>
+                // Fallback mock data (kullanıcı local olarak fetch çalıştıramazsa kullanılır)
+                const mockSamples = [
+                    { id: 1, title: "Küreden Silindir Çıkarma", description: "Küreden Silindir Çıkarma Çizimi.", category: "TikZ", tags: ["3D"], date: "2025-10-25" },
+                    { id: 2, title: "Yeni Komut Tanımlama", description: "Yeni komutları nasıl tanımlarız?", category: "LaTeX", tags: [], date: "2025-10-25" },
+                    { id: 3, title: "Coulomb Kanunu", description: "Coulomb Kanunu Nedir?", category: "LaTeX", tags: [], date: "2025-10-23" },
+                    { id: 4, title: "Türkçe Makale Örneği", description: "Türkçe Makale Örneği", category: "LaTeX", tags: ["Türkçe", "makale-sınıfı"], date: "2025-10-05" },
+                    { id: 5, title: "Türkçe Kitap Örneği", description: "Türkçe Kitap Örneği", category: "LaTeX", tags: ["Türkçe", "kitap-sınıfı"], date: "2025-10-05" },
+                    { id: 6, title: "Eşitliklerin Yazımı", description: "LaTeX ile Eşitliklerin Yazımı", category: "LaTeX", tags: ["matematik", "formüller"], date: "2025-10-05" },
+                    { id: 7, title: "TikZ İle Perspektif", description: "TikZ ile perspektif çizim.", category: "TikZ", tags: ["3D", "perspektif"], date: "2025-09-22" },
+                    { id: 8, title: "TikZ İle Türk Bayrağı Çizimi", description: "TikZ ile Türk Bayrağının çizimi.", category: "TikZ", tags: ["Türk Bayrağı"], date: "2025-09-09" }
+                ];
 
-        <!-- Örnek Kodlar Listesi -->
-        <section id="samples-list">
-            <h2 class="text-3xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Örnek Kodlar</h2>
-            
-            <!-- DEĞİŞİKLİK: Izgara (grid) yerini dikey liste (flex-col) aldı -->
-            <div id="samples-grid" class="flex flex-col gap-6">
-                <!-- Kartlar buraya JavaScript ile eklenecek -->
-                <!-- Örnek Kart Yapısı (artık liste öğesi):
-                <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg card-hover-effect flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="inline-block bg-purple-500/20 text-purple-300 rounded-full px-3 py-1 text-sm font-semibold">
-                                TikZ
-                            </span>
-                            <span class="text-sm text-gray-400">2025-10-25</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2 hover:text-blue-400 transition-colors"><a href="#">Küreden Silindir Çıkarma</a></h3>
-                        <p class="text-gray-400 mb-4">
-                            Küreden Silindir Çıkarma Çizimi.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold">3D</span>
-                        </div>
-                    </div>
-                    <div class="p-6 bg-slate-800/50">
-                        <a href="ornek_goruntule.html?id=1" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
-                            Görüntüle
-                        </a>
-                    </div>
-                </div>
-                -->
-            </div>
-            <div id="no-results" class="text-center text-gray-400 text-xl hidden">
-                Arama kriterlerine uygun sonuç bulunamadı.
-            </div>
+                // Detay sayfasını başlatır: URL parametresinden `id` alır, JSON'dan veri yükler ve gösterir.
+                async function initDetail() {
+                    const params = new URLSearchParams(window.location.search);
+                    const rawId = params.get('id');
+                    const slugParam = params.get('slug');
+                    const container = document.getElementById('detail-content');
 
-            <!-- Yeni: Sayfalama Kontrolleri -->
-            <div id="pagination-controls">
-                <!-- Sayfa düğmeleri buraya JavaScript ile eklenecek -->
-            </div>
-        </section>
+                    if (!rawId && !slugParam) {
+                        container.innerHTML = `<p class="text-center text-red-400">ID veya slug parametresi bulunamadı.</p>`;
+                        return;
+                    }
 
-    </main>
+                    // JSON dosyasını yüklemeyi dene, başarısız olursa mockSamples kullan
+                    let samples = null;
+                    try {
+                        const res = await fetch('data/samples.json');
+                        if (res.ok) {
+                            samples = await res.json();
+                        } else {
+                            samples = mockSamples;
+                        }
+                    } catch (e) {
+                        // fetch file:// ile bloklanabilir; fallback kullan
+                        samples = mockSamples;
+                    }
 
-    <!-- Alt Bilgi (Footer) -->
-    <footer class="bg-slate-800/50 mt-20 border-t border-slate-700">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-            <p class="text-gray-400">
-                &copy; 2025 LaTeX/TikZ Projesi. AstroBlog Teması kullanılarak oluşturulmuştur.
-            </p>
-        </div>
-    </footer>
+                    // Bulma stratejisi:
+                    // 1) Eğer slug param varsa slug ile eşleştir
+                    // 2) Eğer id param sayısalsa, dizide index-1 kullan (fallback)
+                    // 3) Eğer herhangi bir sample.id varsa ona göre eşleştir
+                    let sample = null;
+                    if (slugParam) {
+                        sample = samples.find(s => String(s.slug) === String(slugParam));
+                    }
 
-    <script>
-        // data/samples.json dosyanızı simüle eden mock data
-        // Ekran görüntünüzdeki verilere dayanarak oluşturdum.
-        const mockSamples = [
-            {
-                id: 1,
-                title: "Küreden Silindir Çıkarma",
-                description: "Küreden Silindir Çıkarma Çizimi.",
-                category: "TikZ",
-                tags: ["3D"],
-                date: "2025-10-25"
-            },
-            {
-                id: 2,
-                title: "Yeni Komut Tanımlama",
-                description: "Yeni komutları nasıl tanımlarız?",
-                category: "LaTeX",
-                tags: [],
-                date: "2025-10-25"
-            },
-            {
-                id: 3,
-                title: "Coulomb Kanunu",
-                description: "Coulomb Kanunu Nedir?",
-                category: "LaTeX",
-                tags: [],
-                date: "2025-10-23"
-            },
-            {
-                id: 4,
-                title: "Türkçe Makale Örneği",
-                description: "Türkçe Makale Örneği",
-                category: "LaTeX",
-                tags: ["Türkçe", "makale-sınıfı"],
-                date: "2025-10-05"
-            },
-            {
-                id: 5,
-                title: "Türkçe Kitap Örneği",
-                description: "Türkçe Kitap Örneği",
-                category: "LaTeX",
-                tags: ["Türkçe", "kitap-sınıfı"],
-                date: "2025-10-05"
-            },
-            {
-                id: 6,
-                title: "Eşitliklerin Yazımı",
-                description: "LaTeX ile Eşitliklerin Yazımı",
-                category: "LaTeX",
-                tags: ["matematik", "formüller"],
-                date: "2025-10-05"
-            },
-            {
-                id: 7,
-                title: "TikZ İle Perspektif",
-                description: "TikZ ile perspektif çizim.",
-                category: "TikZ",
-                tags: ["3D", "perspektif"],
-                date: "2025-09-22"
-            },
-            {
-                id: 8,
-                title: "TikZ İle Türk Bayrağı Çizimi",
-                description: "TikZ ile Türk Bayrağının çizimi.",
-                category: "TikZ",
-                tags: ["Türk Bayrağı"],
-                date: "2025-09-09"
-            }
-        ];
+                    if (!sample && rawId) {
+                        // önce id alanı varsa ona göre ara
+                        sample = samples.find(s => String(s.id) === String(rawId));
+                    }
 
-        // --- SAYFALAMA VE FİLTRELEME MANTIĞI ---
+                    if (!sample && rawId && /^\d+$/.test(rawId)) {
+                        const idx = parseInt(rawId, 10) - 1;
+                        if (idx >= 0 && idx < samples.length) sample = samples[idx];
+                    }
 
-        // Global Durum (State) Değişkenleri
-        let currentPage = 1;
-        const itemsPerPage = 5; // Sayfa başına 5 öğe
-        let filteredSamples = []; // Filtrelenmiş tüm öğelerin tam listesi
+                    if (!sample) {
+                        container.innerHTML = `<p class="text-center text-gray-400">Öğe bulunamadı (id/slug=${rawId || slugParam}).</p>`;
+                        return;
+                    }
 
-        // DOM Elementleri
-        const samplesGrid = document.getElementById('samples-grid');
-        const categoryFilter = document.getElementById('category-filter');
-        const searchInput = document.getElementById('search-input');
-        const noResultsDiv = document.getElementById('no-results');
-        const paginationContainer = document.getElementById('pagination-controls');
+                    // Normalize et: veri dosyanız `name` ve `createdAt` kullanıyor.
+                    const normalized = {
+                        id: sample.id ?? sample.slug ?? null,
+                        title: sample.title ?? sample.name ?? sample.slug ?? 'Başlıksız',
+                        description: sample.description ?? '',
+                        category: sample.category ?? '',
+                        tags: sample.tags ?? [],
+                        date: sample.date ?? sample.createdAt ?? '',
+                        texPath: sample.texPath ?? null,
+                        pdfPath: sample.pdfPath ?? null
+                    };
 
-        // 1. Liste Öğelerini Ekrana Çizen Fonksiyon
-        // (Eski renderSamples fonksiyonu, artık sadece verilen sayfayı çiziyor)
-        function renderListItems(samples) {
-            samplesGrid.innerHTML = ''; // Mevcut listeyi temizle
+                    const tagsHtml = (normalized.tags || []).filter(Boolean).map(tag => `<span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold mr-2">${tag}</span>`).join('');
 
-            // "Sonuç yok" mesajını kontrol et
-            if (filteredSamples.length === 0) {
-                noResultsDiv.classList.remove('hidden');
-            } else {
-                noResultsDiv.classList.add('hidden');
-            }
+                    container.innerHTML = `
+                        <article class="max-w-7xl mx-auto">
+                            <header class="mb-6">
+                                <h1 class="text-3xl md:text-4xl font-bold mb-2">${normalized.title}</h1>
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="inline-block ${normalized.category && normalized.category.toLowerCase().includes('tikz') ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300'} rounded-full px-3 py-1 text-sm font-semibold">${normalized.category}</span>
+                                    <time class="text-sm text-gray-400">${normalized.date}</time>
+                                </div>
+                                <p class="text-gray-300 mb-4">${normalized.description}</p>
+                                ${normalized.tags && normalized.tags.length ? `<div class="mb-4">${tagsHtml}</div>` : ''}
+                            </header>
 
-            // 'samples' dizisi (sadece bu sayfadakiler) için öğeleri oluştur
-            samples.forEach(sample => {
-                const tagsHtml = sample.tags.map(tag => 
-                    `<span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold">${tag}</span>`
-                ).join('');
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Sol: TeX kodu ve kopyala butonu -->
+                                <div class="bg-slate-900 border border-slate-700 p-4 rounded">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h2 class="text-lg font-semibold">TeX Kaynağı</h2>
+                                        <div class="flex items-center gap-2">
+                                            ${normalized.texPath ? `<a id="download-tex" href="${normalized.texPath}" download class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-1 px-3 rounded">TeX İndir</a>` : ''}
+                                            <button id="copy-tex" class="text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded">Kopyala</button>
+                                        </div>
+                                    </div>
+                                    <pre id="tex-code" class="whitespace-pre-wrap overflow-auto text-sm leading-6 p-3 bg-slate-800 rounded text-gray-100" style="max-height:720px;"></pre>
+                                </div>
 
-                const categoryBg = sample.category === 'TikZ' ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300';
-
-                const itemHtml = `
-                <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg card-hover-effect flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
-                    
-                    <!-- Sol Taraf: Bilgi -->
-                    <div class="flex-grow w-full">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-x-4 gap-y-2 mb-2">
-                            <h3 class="text-2xl font-bold hover:text-blue-400 transition-colors">
-                                <a href="ornek_goruntule.html?id=${sample.id}">${sample.title}</a>
-                            </h3>
-                            <span class="inline-block ${categoryBg} rounded-full px-3 py-1 text-sm font-semibold flex-shrink-0 w-max">
-                                ${sample.category}
-                            </span>
-                        </div>
-                        <p class="text-gray-400 mb-4 text-sm">
-                            ${sample.description}
-                        </p>
-                        ${sample.tags.length > 0 ? `<div class="flex flex-wrap gap-2">${tagsHtml}</div>` : ''}
-                    </div>
-                    
-                    <!-- Sağ Taraf: Tarih ve Buton -->
-                    <div class="flex-shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
-                        <span class="text-sm text-gray-400 w-full sm:w-auto sm:text-right" style="min-width: 90px;">${sample.date}</span>
-                        <a href="ornek_goruntule.html?id=${sample.id}" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
-                            Görüntüle
-                        </a>
-                    </div>
-                </div>
-                `;
-                samplesGrid.innerHTML += itemHtml;
-            });
-        }
-
-        // 2. Sayfalama Düğmelerini Çizen Fonksiyon
-        function renderPaginationControls() {
-            paginationContainer.innerHTML = ''; // Eski düğmeleri temizle
-            
-            const totalPages = Math.ceil(filteredSamples.length / itemsPerPage);
-            if (totalPages <= 1) return; // 1 sayfa varsa düğme çizme
-
-            let paginationHtml = '<nav class="flex justify-center items-center space-x-2 mt-10">';
-
-            // "Önceki" Düğmesi
-            paginationHtml += `
-                <button onclick="changePage(${currentPage - 1})" 
-                        class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}"
-                        ${currentPage === 1 ? 'disabled' : ''}>
-                    &larr; Önceki
-                </button>
-            `;
-
-            // Sayfa Numarası Düğmeleri
-            for (let i = 1; i <= totalPages; i++) {
-                if (i === currentPage) {
-                    paginationHtml += `
-                        <button class="px-4 py-2 rounded-lg bg-blue-600 text-white font-bold" disabled>${i}</button>
+                                <!-- Sağ: PDF görüntüleyici -->
+                                <div class="bg-slate-900 border border-slate-700 p-4 rounded flex flex-col">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <h2 class="text-lg font-semibold">PDF Önizleme</h2>
+                                        <div class="flex items-center gap-2">
+                                            <button id="zoom-out" class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-1 px-3 rounded">-</button>
+                                            <button id="zoom-reset" class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-1 px-3 rounded">%100</button>
+                                            <button id="zoom-in" class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-1 px-3 rounded">+</button>
+                                            <button id="fit-width" class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-1 px-3 rounded">Fit</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 border border-slate-700 rounded overflow-hidden p-3 bg-slate-800">
+                                        ${normalized.pdfPath ? `
+                                            <div id="pdf-viewer" class="w-full h-96 md:h-[720px] flex flex-col">
+                                                <div class="flex-1 overflow-auto" id="pdf-container" style="background:#111827;padding:8px;">
+                                                    <canvas id="pdf-canvas" class="mx-auto block" style="background: #fff; display: block;"></canvas>
+                                                </div>
+                                                <div class="mt-2 flex items-center justify-between text-sm text-gray-300">
+                                                    <div>Sayfa: <span id="page-num">0</span> / <span id="page-count">0</span></div>
+                                                    <div class="flex items-center gap-2">
+                                                        <button id="page-prev" class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-0.5 px-2 rounded">◀</button>
+                                                        <input id="page-input" type="number" min="1" value="1" class="w-16 text-black text-sm p-1 rounded" />
+                                                        <button id="page-next" class="text-sm bg-slate-700 hover:bg-slate-600 text-white font-semibold py-0.5 px-2 rounded">▶</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ` : `<div class="p-6 text-center text-gray-400">PDF bulunamadı.</div>`}
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                     `;
-                } else {
-                    paginationHtml += `
-                        <button onclick="changePage(${i})" 
-                                class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors">
-                            ${i}
-                        </button>
-                    `;
+
+                    // Sonrasında TeX dosyasını fetch edip içeriği göster
+                    const texElem = document.getElementById('tex-code');
+                    const copyBtn = document.getElementById('copy-tex');
+                    if (normalized.texPath) {
+                        try {
+                            const resp = await fetch(normalized.texPath);
+                            if (resp.ok) {
+                                const texText = await resp.text();
+                                // Güvenli şekilde ham metni yerleştir
+                                texElem.textContent = texText;
+                                copyBtn.addEventListener('click', async () => {
+                                    try {
+                                        await navigator.clipboard.writeText(texText);
+                                        copyBtn.textContent = 'Kopyalandı';
+                                        setTimeout(() => copyBtn.textContent = 'Kopyala', 1500);
+                                    } catch (e) {
+                                        alert('Kopyalama başarısız: ' + e.message);
+                                    }
+                                });
+                            } else {
+                                texElem.textContent = 'TeX dosyası yüklenemedi.';
+                                copyBtn.disabled = true;
+                            }
+                        } catch (e) {
+                            texElem.textContent = 'TeX dosyası yüklenemedi.';
+                            copyBtn.disabled = true;
+                        }
+                    } else {
+                        texElem.textContent = 'TeX kaynağı mevcut değil.';
+                        copyBtn.disabled = true;
+                    }
+
+                    // PDF.js viewer initialization and controls
+                    if (normalized.pdfPath && window.pdfjsLib) {
+                        // configure worker
+                        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+                        const url = normalized.pdfPath;
+                        let pdfDoc = null;
+                        let pageNum = 1;
+                        let scale = 1.0;
+                        const canvas = document.getElementById('pdf-canvas');
+                        const ctx = canvas.getContext('2d');
+                        const pageNumElem = document.getElementById('page-num');
+                        const pageCountElem = document.getElementById('page-count');
+
+                        async function renderPage(num) {
+                            const page = await pdfDoc.getPage(num);
+                            const viewport = page.getViewport({ scale: scale });
+                            canvas.width = Math.floor(viewport.width);
+                            canvas.height = Math.floor(viewport.height);
+                            const renderContext = {
+                                canvasContext: ctx,
+                                viewport: viewport
+                            };
+                            await page.render(renderContext).promise;
+                            pageNumElem.textContent = String(num);
+                            const pageInputElem = document.getElementById('page-input');
+                            if (pageInputElem) pageInputElem.value = String(num);
+                        }
+
+                        async function queueRenderPage(num) {
+                            if (!pdfDoc) return;
+                            if (num < 1) num = 1;
+                            if (num > pdfDoc.numPages) num = pdfDoc.numPages;
+                            pageNum = num;
+                            await renderPage(pageNum);
+                        }
+
+                        // Controls
+                        const zoomInBtn = document.getElementById('zoom-in');
+                        const zoomOutBtn = document.getElementById('zoom-out');
+                        const zoomResetBtn = document.getElementById('zoom-reset');
+                        const fitWidthBtn = document.getElementById('fit-width');
+                        const pagePrevBtn = document.getElementById('page-prev');
+                        const pageNextBtn = document.getElementById('page-next');
+                        const pageInput = document.getElementById('page-input');
+
+                        zoomInBtn.addEventListener('click', async () => {
+                            scale = +(scale + 0.25).toFixed(2);
+                            await queueRenderPage(pageNum);
+                        });
+                        zoomOutBtn.addEventListener('click', async () => {
+                            scale = Math.max(0.25, +(scale - 0.25).toFixed(2));
+                            await queueRenderPage(pageNum);
+                        });
+                        zoomResetBtn.addEventListener('click', async () => {
+                            scale = 1.0;
+                            await queueRenderPage(pageNum);
+                        });
+                        fitWidthBtn.addEventListener('click', async () => {
+                            // set scale so canvas width equals container width
+                            const container = document.getElementById('pdf-container');
+                            // guess: render first page at scale 1 to get original width
+                            const testPage = await pdfDoc.getPage(pageNum);
+                            const viewport1 = testPage.getViewport({ scale: 1.0 });
+                            const containerWidth = container.clientWidth - 16; // padding
+                            const target = +(containerWidth / viewport1.width).toFixed(2);
+                            scale = Math.max(0.25, Math.min(3, target));
+                            await queueRenderPage(pageNum);
+                        });
+
+                        // page navigation via buttons and input
+                        pagePrevBtn.addEventListener('click', () => queueRenderPage(pageNum - 1));
+                        pageNextBtn.addEventListener('click', () => queueRenderPage(pageNum + 1));
+                        pageInput.addEventListener('change', () => {
+                            let val = parseInt(pageInput.value, 10);
+                            if (isNaN(val)) val = pageNum;
+                            queueRenderPage(val);
+                        });
+
+                        // page navigation via keyboard (optional)
+                        document.addEventListener('keydown', (e) => {
+                            if (e.key === 'ArrowRight') queueRenderPage(pageNum + 1);
+                            if (e.key === 'ArrowLeft') queueRenderPage(pageNum - 1);
+                        });
+
+                        // Load document
+                        try {
+                            const loadingTask = pdfjsLib.getDocument(url);
+                            pdfDoc = await loadingTask.promise;
+                            pageCountElem.textContent = String(pdfDoc.numPages);
+                            pageNum = 1;
+                            await queueRenderPage(pageNum);
+                        } catch (err) {
+                            const container = document.getElementById('pdf-container');
+                            container.innerHTML = `<div class="p-6 text-center text-red-400">PDF yüklenemedi: ${err.message}</div>`;
+                        }
+                    }
                 }
-            }
 
-            // "Sonraki" Düğmesi
-            paginationHtml += `
-                <button onclick="changePage(${currentPage + 1})" 
-                        class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}"
-                        ${currentPage === totalPages ? 'disabled' : ''}>
-                    Sonraki &rarr;
-                </button>
-            `;
-
-            paginationHtml += '</nav>';
-            paginationContainer.innerHTML = paginationHtml;
-        }
-
-        // 3. Sayfayı Gösteren Ana Fonksiyon
-        // (Hem listeyi hem de düğmeleri günceller)
-        function displayPage() {
-            // Geçerli sayfadaki öğeleri hesapla
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const pageItems = filteredSamples.slice(startIndex, endIndex);
-
-            // Liste öğelerini çiz
-            renderListItems(pageItems);
-
-            // Sayfalama düğmelerini çiz
-            renderPaginationControls();
-        }
-
-        // 4. Filtreleme ve Arama Fonksiyonu
-        // (Filtre/arama değiştiğinde tetiklenir)
-        function filterAndSearch() {
-            const category = categoryFilter.value;
-            const searchTerm = searchInput.value.toLowerCase();
-
-            // Orijinal veriyi filtrele
-            filteredSamples = mockSamples.filter(sample => {
-                const matchesCategory = (category === 'Tümü' || sample.category === category);
-                
-                const matchesSearch = (
-                    sample.title.toLowerCase().includes(searchTerm) ||
-                    sample.description.toLowerCase().includes(searchTerm) ||
-                    sample.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-                );
-
-                return matchesCategory && matchesSearch;
-            });
-
-            // Filtreleme yapıldığında 1. sayfaya dön
-            currentPage = 1;
-            // Yeni duruma göre sayfayı göster
-            displayPage();
-        }
-
-        // 5. Sayfa Değiştirme Fonksiyonu
-        // (Düğmelere tıklandığında tetiklenir)
-        function changePage(page) {
-            const totalPages = Math.ceil(filteredSamples.length / itemsPerPage);
-            
-            // Geçersiz sayfa numaralarını engelle
-            if (page < 1 || page > totalPages) {
-                return;
-            }
-
-            currentPage = page;
-            displayPage();
-
-            // Sayfa değiştiğinde listenin başına odaklan
-            document.getElementById('samples-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            // Başlangıçta tüm örnekleri filtrele (filteredSamples dizisini doldur)
-            // ve 1. sayfayı göster
-            filterAndSearch();
-        });
-
-        categoryFilter.addEventListener('change', filterAndSearch);
-        searchInput.addEventListener('input', filterAndSearch);
-
-    </script>
+                document.addEventListener('DOMContentLoaded', initDetail);
+            </script>
 </body>
 </html>

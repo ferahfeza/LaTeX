@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaTeX Örnekleri - AstroBlog Teması</title>
+    <title>LaTeX Örnekleri</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter -->
@@ -31,12 +31,12 @@
             <nav class="flex items-center justify-between h-16">
                 <!-- Logo/Başlık -->
                 <a href="latex_ornekler.html" class="text-2xl font-bold">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">LaTeX/TikZ Projesi</span>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">LaTeX/TikZ Örnekleri</span>
                 </a>
                 
                 <!-- Menü Linkleri -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="latex_ornekler.html" class="font-semibold text-gray-200 hover:text-blue-400 transition-colors">Örnek Kodlar</a>
+                   <!-- <a href="latex_ornekler.html" class="font-semibold text-gray-200 hover:text-blue-400 transition-colors">Örnek Kodlar</a>-->
                     <a href="#" class="font-semibold text-gray-400 hover:text-blue-400 transition-colors">Hakkında</a>
                 </div>
                 
@@ -120,79 +120,18 @@
     <footer class="bg-slate-800/50 mt-20 border-t border-slate-700">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
             <p class="text-gray-400">
-                &copy; 2025 LaTeX/TikZ Projesi. AstroBlog Teması kullanılarak oluşturulmuştur.
+                &copy; 2025 LaTeX & TikZ
             </p>
         </div>
     </footer>
 
     <script>
-        // data/samples.json dosyanızı simüle eden mock data
-        // Ekran görüntünüzdeki verilere dayanarak oluşturdum.
-        const mockSamples = [
-            {
-                id: 1,
-                title: "Küreden Silindir Çıkarma",
-                description: "Küreden Silindir Çıkarma Çizimi.",
-                category: "TikZ",
-                tags: ["3D"],
-                date: "2025-10-25"
-            },
-            {
-                id: 2,
-                title: "Yeni Komut Tanımlama",
-                description: "Yeni komutları nasıl tanımlarız?",
-                category: "LaTeX",
-                tags: [],
-                date: "2025-10-25"
-            },
-            {
-                id: 3,
-                title: "Coulomb Kanunu",
-                description: "Coulomb Kanunu Nedir?",
-                category: "LaTeX",
-                tags: [],
-                date: "2025-10-23"
-            },
-            {
-                id: 4,
-                title: "Türkçe Makale Örneği",
-                description: "Türkçe Makale Örneği",
-                category: "LaTeX",
-                tags: ["Türkçe", "makale-sınıfı"],
-                date: "2025-10-05"
-            },
-            {
-                id: 5,
-                title: "Türkçe Kitap Örneği",
-                description: "Türkçe Kitap Örneği",
-                category: "LaTeX",
-                tags: ["Türkçe", "kitap-sınıfı"],
-                date: "2025-10-05"
-            },
-            {
-                id: 6,
-                title: "Eşitliklerin Yazımı",
-                description: "LaTeX ile Eşitliklerin Yazımı",
-                category: "LaTeX",
-                tags: ["matematik", "formüller"],
-                date: "2025-10-05"
-            },
-            {
-                id: 7,
-                title: "TikZ İle Perspektif",
-                description: "TikZ ile perspektif çizim.",
-                category: "TikZ",
-                tags: ["3D", "perspektif"],
-                date: "2025-09-22"
-            },
-            {
-                id: 8,
-                title: "TikZ İle Türk Bayrağı Çizimi",
-                description: "TikZ ile Türk Bayrağının çizimi.",
-                category: "TikZ",
-                tags: ["Türk Bayrağı"],
-                date: "2025-09-09"
-            }
+        // Tüm örnekleri sunucudaki `data/samples.json` dosyasından al.
+        // Eğer fetch başarısız olursa gömülü fallback kullanılacak.
+        let allSamples = [];
+        const fallbackSamples = [
+            { slug: 'kure', name: 'Küreden Silindir Çıkarma', category: 'TiKz', tags: ['3D'], description: 'Küreden Silindir Çıkarma Çizimi.', createdAt: '2025-10-25' },
+            { slug: 'yeni-komut', name: 'Yeni Komut Tanımlama', category: 'LaTeX', tags: [], description: 'Yeni komutları nasıl tanımlarız?', createdAt: '2025-10-25' }
         ];
 
         // --- SAYFALAMA VE FİLTRELEME MANTIĞI ---
@@ -227,7 +166,9 @@
                     `<span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold">${tag}</span>`
                 ).join('');
 
-                const categoryBg = sample.category === 'TikZ' ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300';
+                const categoryBg = (sample.category || '').toString().toLowerCase().includes('tikz') ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300';
+
+                const slugOrId = sample.slug ? sample.slug : sample.id;
 
                 const itemHtml = `
                 <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg card-hover-effect flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
@@ -236,7 +177,7 @@
                     <div class="flex-grow w-full">
                         <div class="flex flex-col sm:flex-row sm:items-center gap-x-4 gap-y-2 mb-2">
                             <h3 class="text-2xl font-bold hover:text-blue-400 transition-colors">
-                                <a href="ornek_goruntule.html?id=${sample.id}">${sample.title}</a>
+                                <a href="ornek_goruntule.html?slug=${slugOrId}">${sample.title}</a>
                             </h3>
                             <span class="inline-block ${categoryBg} rounded-full px-3 py-1 text-sm font-semibold flex-shrink-0 w-max">
                                 ${sample.category}
@@ -251,7 +192,7 @@
                     <!-- Sağ Taraf: Tarih ve Buton -->
                     <div class="flex-shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
                         <span class="text-sm text-gray-400 w-full sm:w-auto sm:text-right" style="min-width: 90px;">${sample.date}</span>
-                        <a href="ornek_goruntule.html?id=${sample.id}" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+                        <a href="ornek_goruntule.html?slug=${slugOrId}" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
                             Görüntüle
                         </a>
                     </div>
@@ -329,14 +270,18 @@
             const category = categoryFilter.value;
             const searchTerm = searchInput.value.toLowerCase();
 
-            // Orijinal veriyi filtrele
-            filteredSamples = mockSamples.filter(sample => {
-                const matchesCategory = (category === 'Tümü' || sample.category === category);
-                
+            // Orijinal veriyi filtrele (allSamples üzerinden)
+            filteredSamples = allSamples.filter(sample => {
+                const sampleCat = (sample.category || '').toString().toLowerCase();
+                const selectedCat = (category || '').toString().toLowerCase();
+                const matchesCategory = (selectedCat === 'tümü' || sampleCat === selectedCat);
+                const title = (sample.title || sample.name || '').toString().toLowerCase();
+                const desc = (sample.description || '').toString().toLowerCase();
+                const tags = (sample.tags || []).map(t => t.toString().toLowerCase());
                 const matchesSearch = (
-                    sample.title.toLowerCase().includes(searchTerm) ||
-                    sample.description.toLowerCase().includes(searchTerm) ||
-                    sample.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+                    title.includes(searchTerm) ||
+                    desc.includes(searchTerm) ||
+                    tags.some(tag => tag.includes(searchTerm))
                 );
 
                 return matchesCategory && matchesSearch;
@@ -367,9 +312,32 @@
 
 
         // Event Listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            // Başlangıçta tüm örnekleri filtrele (filteredSamples dizisini doldur)
-            // ve 1. sayfayı göster
+        // Sayfa yüklenince JSON'dan veriyi çek ve normalize et
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('data/samples.json');
+                if (res.ok) {
+                    const json = await res.json();
+                    // Normalize: map json alanlarını render fonksiyonunun beklediği forma çevir
+                    allSamples = json.map((s, idx) => ({
+                        id: s.id ?? (idx + 1),
+                        slug: s.slug ?? null,
+                        title: s.title ?? s.name ?? (`Örnek ${idx+1}`),
+                        description: s.description ?? s.texPath ?? '',
+                        category: s.category ?? '',
+                        tags: s.tags ?? [],
+                        date: s.date ?? s.createdAt ?? '',
+                        texPath: s.texPath ?? null,
+                        pdfPath: s.pdfPath ?? null
+                    }));
+                } else {
+                    allSamples = fallbackSamples.map((s, idx) => ({ id: idx+1, slug: s.slug, title: s.name, description: s.description, category: s.category, tags: s.tags, date: s.createdAt }));
+                }
+            } catch (e) {
+                allSamples = fallbackSamples.map((s, idx) => ({ id: idx+1, slug: s.slug, title: s.name, description: s.description, category: s.category, tags: s.tags, date: s.createdAt }));
+            }
+
+            // filterAndSearch artık allSamples üzerinden çalışıyor
             filterAndSearch();
         });
 
