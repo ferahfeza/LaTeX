@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Örnekleri - AstroBlog Teması</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(113, 113, 222, 0.1), 0 10px 10px -5px rgba(113, 113, 222, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-gray-100 min-h-screen flex flex-col">
+
+    <!-- Navigasyon Barı -->
+    <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-slate-900/60 shadow-lg shadow-blue-500/10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <!-- Logo/Başlık -->
+                <a href="latex_ornekler.html" class="text-2xl font-bold">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">LaTeX/TikZ Projesi</span>
+                </a>
+                
+                <!-- Menü Linkleri -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="latex_ornekler.html" class="font-semibold text-gray-200 hover:text-blue-400 transition-colors">Örnek Kodlar</a>
+                    <a href="#" class="font-semibold text-gray-400 hover:text-blue-400 transition-colors">Hakkında</a>
+                </div>
+                
+                <!-- Mobil Menü Butonu -->
+                <div class="md:hidden">
+                    <button class="text-gray-200 hover:text-blue-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Ana İçerik -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+
+        <!-- Filtreleme ve Arama Bölümü -->
+        <section class="mb-12 p-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kategori Filtresi -->
+                <div>
+                    <label for="category-filter" class="block text-sm font-medium text-gray-300 mb-2">Kategori</label>
+                    <select id="category-filter" class="w-full bg-slate-700 border border-slate-600 text-white rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="Tümü">Tümü</option>
+                        <option value="TikZ">TikZ</option>
+                        <option value="LaTeX">LaTeX</option>
+                    </select>
+                </div>
+                <!-- Arama Barı -->
+                <div class="md:col-span-2">
+                    <label for="search-input" class="block text-sm font-medium text-gray-300 mb-2">Ara (Başlık, Açıklama, Tag)</label>
+                    <input type="text" id="search-input" class="w-full bg-slate-700 border border-slate-600 text-white rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500" placeholder="Örn: 'Perspektif' veya 'Tablo'">
+                </div>
+            </div>
+        </section>
+
+        <!-- Örnek Kodlar Listesi -->
+        <section id="samples-list">
+            <h2 class="text-3xl font-bold mb-8 border-l-4 border-blue-500 pl-4">Örnek Kodlar</h2>
+            
+            <!-- DEĞİŞİKLİK: Izgara (grid) yerini dikey liste (flex-col) aldı -->
+            <div id="samples-grid" class="flex flex-col gap-6">
+                <!-- Kartlar buraya JavaScript ile eklenecek -->
+                <!-- Örnek Kart Yapısı (artık liste öğesi):
+                <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg card-hover-effect flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="inline-block bg-purple-500/20 text-purple-300 rounded-full px-3 py-1 text-sm font-semibold">
+                                TikZ
+                            </span>
+                            <span class="text-sm text-gray-400">2025-10-25</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 hover:text-blue-400 transition-colors"><a href="#">Küreden Silindir Çıkarma</a></h3>
+                        <p class="text-gray-400 mb-4">
+                            Küreden Silindir Çıkarma Çizimi.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold">3D</span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-slate-800/50">
+                        <a href="ornek_goruntule.html?id=1" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+                            Görüntüle
+                        </a>
+                    </div>
+                </div>
+                -->
+            </div>
+            <div id="no-results" class="text-center text-gray-400 text-xl hidden">
+                Arama kriterlerine uygun sonuç bulunamadı.
+            </div>
+
+            <!-- Yeni: Sayfalama Kontrolleri -->
+            <div id="pagination-controls">
+                <!-- Sayfa düğmeleri buraya JavaScript ile eklenecek -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Alt Bilgi (Footer) -->
+    <footer class="bg-slate-800/50 mt-20 border-t border-slate-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p class="text-gray-400">
+                &copy; 2025 LaTeX/TikZ Projesi. AstroBlog Teması kullanılarak oluşturulmuştur.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // data/samples.json dosyanızı simüle eden mock data
+        // Ekran görüntünüzdeki verilere dayanarak oluşturdum.
+        const mockSamples = [
+            {
+                id: 1,
+                title: "Küreden Silindir Çıkarma",
+                description: "Küreden Silindir Çıkarma Çizimi.",
+                category: "TikZ",
+                tags: ["3D"],
+                date: "2025-10-25"
+            },
+            {
+                id: 2,
+                title: "Yeni Komut Tanımlama",
+                description: "Yeni komutları nasıl tanımlarız?",
+                category: "LaTeX",
+                tags: [],
+                date: "2025-10-25"
+            },
+            {
+                id: 3,
+                title: "Coulomb Kanunu",
+                description: "Coulomb Kanunu Nedir?",
+                category: "LaTeX",
+                tags: [],
+                date: "2025-10-23"
+            },
+            {
+                id: 4,
+                title: "Türkçe Makale Örneği",
+                description: "Türkçe Makale Örneği",
+                category: "LaTeX",
+                tags: ["Türkçe", "makale-sınıfı"],
+                date: "2025-10-05"
+            },
+            {
+                id: 5,
+                title: "Türkçe Kitap Örneği",
+                description: "Türkçe Kitap Örneği",
+                category: "LaTeX",
+                tags: ["Türkçe", "kitap-sınıfı"],
+                date: "2025-10-05"
+            },
+            {
+                id: 6,
+                title: "Eşitliklerin Yazımı",
+                description: "LaTeX ile Eşitliklerin Yazımı",
+                category: "LaTeX",
+                tags: ["matematik", "formüller"],
+                date: "2025-10-05"
+            },
+            {
+                id: 7,
+                title: "TikZ İle Perspektif",
+                description: "TikZ ile perspektif çizim.",
+                category: "TikZ",
+                tags: ["3D", "perspektif"],
+                date: "2025-09-22"
+            },
+            {
+                id: 8,
+                title: "TikZ İle Türk Bayrağı Çizimi",
+                description: "TikZ ile Türk Bayrağının çizimi.",
+                category: "TikZ",
+                tags: ["Türk Bayrağı"],
+                date: "2025-09-09"
+            }
+        ];
+
+        // --- SAYFALAMA VE FİLTRELEME MANTIĞI ---
+
+        // Global Durum (State) Değişkenleri
+        let currentPage = 1;
+        const itemsPerPage = 5; // Sayfa başına 5 öğe
+        let filteredSamples = []; // Filtrelenmiş tüm öğelerin tam listesi
+
+        // DOM Elementleri
+        const samplesGrid = document.getElementById('samples-grid');
+        const categoryFilter = document.getElementById('category-filter');
+        const searchInput = document.getElementById('search-input');
+        const noResultsDiv = document.getElementById('no-results');
+        const paginationContainer = document.getElementById('pagination-controls');
+
+        // 1. Liste Öğelerini Ekrana Çizen Fonksiyon
+        // (Eski renderSamples fonksiyonu, artık sadece verilen sayfayı çiziyor)
+        function renderListItems(samples) {
+            samplesGrid.innerHTML = ''; // Mevcut listeyi temizle
+
+            // "Sonuç yok" mesajını kontrol et
+            if (filteredSamples.length === 0) {
+                noResultsDiv.classList.remove('hidden');
+            } else {
+                noResultsDiv.classList.add('hidden');
+            }
+
+            // 'samples' dizisi (sadece bu sayfadakiler) için öğeleri oluştur
+            samples.forEach(sample => {
+                const tagsHtml = sample.tags.map(tag => 
+                    `<span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold">${tag}</span>`
+                ).join('');
+
+                const categoryBg = sample.category === 'TikZ' ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300';
+
+                const itemHtml = `
+                <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg card-hover-effect flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
+                    
+                    <!-- Sol Taraf: Bilgi -->
+                    <div class="flex-grow w-full">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-x-4 gap-y-2 mb-2">
+                            <h3 class="text-2xl font-bold hover:text-blue-400 transition-colors">
+                                <a href="ornek_goruntule.html?id=${sample.id}">${sample.title}</a>
+                            </h3>
+                            <span class="inline-block ${categoryBg} rounded-full px-3 py-1 text-sm font-semibold flex-shrink-0 w-max">
+                                ${sample.category}
+                            </span>
+                        </div>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            ${sample.description}
+                        </p>
+                        ${sample.tags.length > 0 ? `<div class="flex flex-wrap gap-2">${tagsHtml}</div>` : ''}
+                    </div>
+                    
+                    <!-- Sağ Taraf: Tarih ve Buton -->
+                    <div class="flex-shrink-0 flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+                        <span class="text-sm text-gray-400 w-full sm:w-auto sm:text-right" style="min-width: 90px;">${sample.date}</span>
+                        <a href="ornek_goruntule.html?id=${sample.id}" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+                            Görüntüle
+                        </a>
+                    </div>
+                </div>
+                `;
+                samplesGrid.innerHTML += itemHtml;
+            });
+        }
+
+        // 2. Sayfalama Düğmelerini Çizen Fonksiyon
+        function renderPaginationControls() {
+            paginationContainer.innerHTML = ''; // Eski düğmeleri temizle
+            
+            const totalPages = Math.ceil(filteredSamples.length / itemsPerPage);
+            if (totalPages <= 1) return; // 1 sayfa varsa düğme çizme
+
+            let paginationHtml = '<nav class="flex justify-center items-center space-x-2 mt-10">';
+
+            // "Önceki" Düğmesi
+            paginationHtml += `
+                <button onclick="changePage(${currentPage - 1})" 
+                        class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}"
+                        ${currentPage === 1 ? 'disabled' : ''}>
+                    &larr; Önceki
+                </button>
+            `;
+
+            // Sayfa Numarası Düğmeleri
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === currentPage) {
+                    paginationHtml += `
+                        <button class="px-4 py-2 rounded-lg bg-blue-600 text-white font-bold" disabled>${i}</button>
+                    `;
+                } else {
+                    paginationHtml += `
+                        <button onclick="changePage(${i})" 
+                                class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors">
+                            ${i}
+                        </button>
+                    `;
+                }
+            }
+
+            // "Sonraki" Düğmesi
+            paginationHtml += `
+                <button onclick="changePage(${currentPage + 1})" 
+                        class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}"
+                        ${currentPage === totalPages ? 'disabled' : ''}>
+                    Sonraki &rarr;
+                </button>
+            `;
+
+            paginationHtml += '</nav>';
+            paginationContainer.innerHTML = paginationHtml;
+        }
+
+        // 3. Sayfayı Gösteren Ana Fonksiyon
+        // (Hem listeyi hem de düğmeleri günceller)
+        function displayPage() {
+            // Geçerli sayfadaki öğeleri hesapla
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageItems = filteredSamples.slice(startIndex, endIndex);
+
+            // Liste öğelerini çiz
+            renderListItems(pageItems);
+
+            // Sayfalama düğmelerini çiz
+            renderPaginationControls();
+        }
+
+        // 4. Filtreleme ve Arama Fonksiyonu
+        // (Filtre/arama değiştiğinde tetiklenir)
+        function filterAndSearch() {
+            const category = categoryFilter.value;
+            const searchTerm = searchInput.value.toLowerCase();
+
+            // Orijinal veriyi filtrele
+            filteredSamples = mockSamples.filter(sample => {
+                const matchesCategory = (category === 'Tümü' || sample.category === category);
+                
+                const matchesSearch = (
+                    sample.title.toLowerCase().includes(searchTerm) ||
+                    sample.description.toLowerCase().includes(searchTerm) ||
+                    sample.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+                );
+
+                return matchesCategory && matchesSearch;
+            });
+
+            // Filtreleme yapıldığında 1. sayfaya dön
+            currentPage = 1;
+            // Yeni duruma göre sayfayı göster
+            displayPage();
+        }
+
+        // 5. Sayfa Değiştirme Fonksiyonu
+        // (Düğmelere tıklandığında tetiklenir)
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredSamples.length / itemsPerPage);
+            
+            // Geçersiz sayfa numaralarını engelle
+            if (page < 1 || page > totalPages) {
+                return;
+            }
+
+            currentPage = page;
+            displayPage();
+
+            // Sayfa değiştiğinde listenin başına odaklan
+            document.getElementById('samples-list').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Başlangıçta tüm örnekleri filtrele (filteredSamples dizisini doldur)
+            // ve 1. sayfayı göster
+            filterAndSearch();
+        });
+
+        categoryFilter.addEventListener('change', filterAndSearch);
+        searchInput.addEventListener('input', filterAndSearch);
+
+    </script>
+</body>
+</html>
