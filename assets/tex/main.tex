@@ -1,0 +1,48 @@
+\documentclass[b5paper,20pt,twoside]{extreport}
+%\usepackage[utf8]{inputenc}
+\usepackage[turkish]{babel}
+\usepackage{fontspec}
+\usepackage[T1]{fontenc}
+\usepackage {lipsum}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{Times}
+\usepackage{amsmath}
+\titleformat{\chapter}
+{\color{cyan}\normalfont\Large\bfseries}
+{\color{cyan}\thechapter}{1em}{}
+\titleformat{\section}
+{\color{cyan}\normalfont\Large\bfseries}
+{\color{cyan}\thesection}{1em}{}
+
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{10pt}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{#1} }
+
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{ \nouppercase{\leftmark}} }
+\fancyhead[LO]{\textit{ \nouppercase{\rightmark}} }
+
+\renewcommand\footrule{\begin{minipage}{1\textwidth}
+%\vspace*{3mm}
+\hrule width \hsize height 2pt \kern 1mm \hrule width \hsize   
+\end{minipage}\par}%
+
+\renewcommand\headrule{
+\begin{minipage}{1\textwidth}
+\hrule width \hsize \kern 1mm \hrule width \hsize height 2pt 
+\end{minipage}}%
+\setmainfont{BickhamScriptPro-Regular}
+\DeclareMathSizes{5}{5}{8}{8} 
+\begin{document}
+\chapter{Zaman}
+Herkes zamanda yolculuk yapıyor aslında… Anıları ile geçmişe, hayâlleriyle geleceğe… 
+
+
+Takvim düzeni herkes için aynı olsa da, zaman herkes için başka türlü ilerler.
+\end{document}

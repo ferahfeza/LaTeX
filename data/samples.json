@@ -109,5 +109,17 @@
     "texPath": "assets/tex/sine.tex",
     "pdfPath": "assets/pdf/sine.pdf",
     "createdAt": "2025-11-16"
+  },
+  {
+    "slug": "main",
+    "name": "El Yazısı Font Örneği",
+    "category": "LaTeX",
+    "tags": [
+      "Font"
+    ],
+    "description": "LaTeX'de el yazısı fontu kullanma.",
+    "texPath": "assets/tex/main.tex",
+    "pdfPath": "assets/pdf/main.pdf",
+    "createdAt": "2025-11-17"
   }
 ]
