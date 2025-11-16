@@ -111,15 +111,15 @@
     "createdAt": "2025-11-16"
   },
   {
-    "slug": "main",
+    "slug": "el-yazisi",
     "name": "El Yazısı Font Örneği",
     "category": "LaTeX",
     "tags": [
       "Font"
     ],
     "description": "LaTeX'de el yazısı fontu kullanma.",
-    "texPath": "assets/tex/main.tex",
-    "pdfPath": "assets/pdf/main.pdf",
+    "texPath": "assets/tex/el-yazisi.tex",
+    "pdfPath": "assets/pdf/el-yazisi.pdf",
     "createdAt": "2025-11-17"
   },
   {
