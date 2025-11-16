@@ -162,9 +162,7 @@
 
             // 'samples' dizisi (sadece bu sayfadakiler) için öğeleri oluştur
                 samples.forEach(sample => {
-                const tagsHtml = sample.tags.map(tag => 
-                    `<span class="inline-block bg-slate-700 text-gray-300 rounded-full px-3 py-1 text-xs font-semibold">${tag}</span>`
-                ).join('');
+                // tags are intentionally not shown in the list view
 
                 const categoryBg = (sample.category || '').toString().toLowerCase().includes('tikz') ? 'bg-purple-500/20 text-purple-300' : 'bg-blue-500/20 text-blue-300';
 
@@ -186,7 +184,6 @@
                         <p class="text-gray-400 mb-2 text-sm">
                             ${sample.description}
                         </p>
-                        ${sample.tags.length > 0 ? `<div class="flex flex-wrap gap-2">${tagsHtml}</div>` : ''}
                     </div>
                     
                     <!-- Sağ Taraf: Tarih ve Buton -->
