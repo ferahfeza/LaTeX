@@ -121,5 +121,18 @@
     "texPath": "assets/tex/main.tex",
     "pdfPath": "assets/pdf/main.pdf",
     "createdAt": "2025-11-17"
+  },
+  {
+    "slug": "main",
+    "name": "Renkli Devre Çizimi",
+    "category": "TiKz",
+    "tags": [
+      "circuitikz",
+      "TiKz"
+    ],
+    "description": "Circutikz ile renkli devre çizimi.",
+    "texPath": "assets/tex/main.tex",
+    "pdfPath": "assets/pdf/main.pdf",
+    "createdAt": "2025-11-17"
   }
 ]
