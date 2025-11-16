@@ -1,0 +1,28 @@
+\documentclass[tikz,border=10pt]{standalone}
+\tikzset{%
+pics/sw/.style args={color=#1,f=#2,p=#3,a=#4}{%
+code={%
+    \def\f{#2}%Frequency
+    \def\p{#3}%Period
+    \def\a{#4}%Amplitude
+\draw[gray!50] (0,-\a) grid (\p*\f,\a); %Grid
+    \pgfmathsetmacro{\n}{#2*#3}
+\foreach \x in{0,1,...,\n}{
+\node at (\x,0)[below right]{\x};}
+    \draw[black,->] (0, 0)  --  (\p*\f+1,0)node[above]{$x$}; %X-Axis
+    \draw[black,->] (0,-\a)node[left]{-$#4$}  --  (0 ,\a+1)node[right]{$y$}; %Y-Axis
+    \node at (0,\a)[left]{$#4$};
+    \pgfmathsetmacro{\k}{#2-1}
+\foreach \t in{0,1,...,\k}{
+\draw[ultra thick,#1] ({\t*\p},0) sin (#3/4+\t*\p,#4)cos(#3/2+\t*\p,0)sin(#3*3/4+\t*\p,-#4)cos(#3+\t*\p,0);%
+}%
+\node at (\n/2,\a+1){$y=\sin\,x$};%
+}
+ }
+ }  
+   \begin{document}
+    \begin{tikzpicture}
+\pic {sw={color=cyan,f=2,p=4,a=3}};
+    \end{tikzpicture}
+
+\end{document}
