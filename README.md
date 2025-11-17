@@ -1,2 +1,2 @@
 # $\LaTeX\$
-LaTeX ve TiKz örnek kodları.
+$\LaTeX\$ ve TiKz örnek kodları.
